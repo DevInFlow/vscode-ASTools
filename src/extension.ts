@@ -25,7 +25,7 @@ class AsDocumentFormatter implements DocumentFormattingEditProvider {
         let outFile = filesPath + "b.as";
         let jarFile = filesPath + "ASPrettyPrinter-1.2.jar";
         let javaPath = "java";
-        let command = javaPath + " -jar " + jarFile +"-indent" + indent+ " -braceStyle " + braceStyle + " -input " + inputFile + " -output " + outFile;
+        let command = javaPath + " -jar " + jarFile +" -indent " + indent+ " -braceStyle " + braceStyle + " -input " + inputFile + " -output " + outFile;
         
         return new Promise((resolve, reject) => {
             exec(command, (error: Error, stdout: string, stderr: string) => {
