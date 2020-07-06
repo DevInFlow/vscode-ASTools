@@ -26,18 +26,34 @@
         "Other"
     ],
     "contributes": {
-        "configuration":{
+        "configuration": {
             "title": "ASTools",
             "properties": {
-                "astools.braceStyle":{
-                    "type":"string",
-                    "default":"Sun",
-                    "enum": ["Sun","Adobe"],
+                "astools.braceStyle": {
+                    "type": "string",
+                    "default": "Sun",
+                    "enum": [
+                        "Sun",
+                        "Adobe"
+                    ],
                     "enumDescriptions": [
                         "{ on the same line",
                         "{ on the next line"
                     ],
                     "description": "Set format style for brace."
+                },
+                "astools.indent": {
+                    "type": "string",
+                    "default": "Tabs",
+                    "enum": [
+                        "Tabs",
+                        "Spaces"
+                    ],
+                    "enumDescriptions": [
+                        "use tab for indentation",
+                        "use space for indentation"
+                    ],
+                    "description": "Set what character use for indentation (tab[true]/space[false])"
                 }
             }
         }

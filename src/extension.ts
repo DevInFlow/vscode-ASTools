@@ -7,19 +7,26 @@ import { DocumentFormattingEditProvider, ExtensionContext, languages, Range, Tex
 /**
  * format code
  */
+
 class AsDocumentFormatter implements DocumentFormattingEditProvider {
     public provideDocumentFormattingEdits(document: TextDocument): ProviderResult<TextEdit[]> {
         let filesPath = path.join(__dirname, "../files/");
         let braceStyle = workspace.getConfiguration("astools").get("braceStyle");
+        let indent = workspace.getConfiguration("astools").get("indent");
+        
         console.log("braceStyle:", braceStyle);
+        console.log("indent:", indent);
+        
         let inputFile = filesPath + "a.as";
         let inputData = document.getText();
+
         writeFileSync(inputFile, inputData);
 
         let outFile = filesPath + "b.as";
         let jarFile = filesPath + "ASPrettyPrinter-1.2.jar";
         let javaPath = "java";
-        let command = javaPath + " -jar " + jarFile + " -braceStyle " + braceStyle + " -input " + inputFile + " -output " + outFile;
+        let command = javaPath + " -jar " + jarFile +"-indent" + indent+ " -braceStyle " + braceStyle + " -input " + inputFile + " -output " + outFile;
+        
         return new Promise((resolve, reject) => {
             exec(command, (error: Error, stdout: string, stderr: string) => {
                 if (!stderr) {
@@ -30,6 +37,7 @@ class AsDocumentFormatter implements DocumentFormattingEditProvider {
                     resolve([TextEdit.replace(range, outData)]);
                 }
                 else {
+                    
                     reject("error: " + stderr);
                 }
             });
